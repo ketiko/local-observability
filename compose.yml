@@ -63,6 +63,8 @@ services:
     environment:
       - ENDPOINT=otel-collector:4317
     restart: always
+    depends_on:
+      - grafana
 
 volumes:
   tempo-data:

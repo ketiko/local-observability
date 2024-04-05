@@ -635,8 +635,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -928,8 +927,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1005,25 +1003,6 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": true,
-          "text": [
-            "article-service",
-            "auth-service",
-            "cart-service",
-            "otelcol-contrib",
-            "postgres",
-            "shop-backend"
-          ],
-          "value": [
-            "article-service",
-            "auth-service",
-            "cart-service",
-            "otelcol-contrib",
-            "postgres",
-            "shop-backend"
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "prometheus"
