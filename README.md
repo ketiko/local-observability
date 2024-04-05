@@ -59,7 +59,7 @@ Random traces are generated automatically to show sample data in addition to you
 
 ### Open Grafana and view your traces, metrics, and logs
 
-Visit http://localhost:3050/d/opentelemetry-apm/opentelemetry-apm?orgId=1&refresh=30s to explore the data in Grafana.
+Visit http://localhost:3050/d/opentelemetry-apm/opentelemetry-apm to explore the data in Grafana.
 
 Optionally, if the default Grafana port of `3050` conflicts with your application you can set the `GRAFANA_PORT` environment variable.
 
