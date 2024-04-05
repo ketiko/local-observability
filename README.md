@@ -17,7 +17,7 @@ This provides a docker compose configuration for running OpenTelemetry tools loc
 ### Start the stack
 
 ```bash
-docker compose up
+./start-observability.sh
 ```
 
 ### Point your OpenTelemetry instrumented application to the collector
@@ -26,21 +26,42 @@ The OpenTemetry Collector is running on the default urls of http://localhost:431
 
 If your SDK supports sending OTLP logs, they will also show up in Grafana.
 
-### Run your application and collect data
+###  Instrument your application and collect data
+#### Java
 
-Optionally, you can generate fake traces to see how it works before wiring up your application.
+To instrument your Java application, set the following environment variables and launch your application.
+
+The opentelemetry-javaagent.jar is included in this repository.
 
 ```bash
-docker compose -f compose.generate-traces.yml up
+EXPORT JAVA_OPTS="-javaagent:./path/to/this/repository/opentelemetry-javaagent.jar"
+EXPORT OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4317"
+EXPORT OTEL_SERVICE_NAME="my-app-name"
 ```
+
+#### Node.js
+
+To instrument your Node.js application, install the following npm packages and the environment variable. Then launch your application.
+
+```bash
+npm install @opentelemetry/sdk-node \
+  @opentelemetry/api \
+  @opentelemetry/auto-instrumentations-node \
+  @opentelemetry/sdk-metrics \
+  @opentelemetry/sdk-trace-node
+
+EXPORT NODE_OPTIONS="--require '@opentelemetry/auto-instrumentations-node/register'"
+EXPORT OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4317"
+EXPORT OTEL_SERVICE_NAME="my-app-name"
+```
+
+Random traces are generated automatically to show sample data in addition to your own application.
 
 ### Open Grafana and view your traces, metrics, and logs
 
-Visit http://localhost:3000/explore to explore the data in Grafana.
+Visit http://localhost:3050/d/opentelemetry-apm/opentelemetry-apm?orgId=1&refresh=30s to explore the data in Grafana.
 
-Some sample dashboards are included.
-
-Optionally, if the default Grafana port of `3000` conflicts with your application you can set the `GRAFANA_PORT` environment variable.
+Optionally, if the default Grafana port of `3050` conflicts with your application you can set the `GRAFANA_PORT` environment variable.
 
 ```bash
 # Add .env file

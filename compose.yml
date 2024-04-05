@@ -51,12 +51,18 @@ services:
       - GF_AUTH_DISABLE_LOGIN_FORM=true
       - GF_FEATURE_TOGGLES_ENABLE=traceqlEditor traceQLStreaming metricsSummary
     ports:
-      - "${GRAFANA_PORT:-3000}:3000"
+      - "${GRAFANA_PORT:-3050}:3000"
     depends_on:
       - tempo
       - prometheus
       - otel-collector
       - loki
+
+  k6-tracing:
+    image: ghcr.io/grafana/xk6-client-tracing:latest
+    environment:
+      - ENDPOINT=otel-collector:4317
+    restart: always
 
 volumes:
   tempo-data:
