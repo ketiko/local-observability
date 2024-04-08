@@ -62,7 +62,6 @@ services:
     image: ghcr.io/grafana/xk6-client-tracing:latest
     environment:
       - ENDPOINT=otel-collector:4317
-    restart: always
     depends_on:
       - grafana
 
