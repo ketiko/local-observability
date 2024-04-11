@@ -20,6 +20,7 @@ services:
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
       - ./config/tempo.yaml:/etc/tempo.yaml
+      - ./tempo-data:/tmp/tempo
 
   prometheus:
     image: prom/prometheus:latest
